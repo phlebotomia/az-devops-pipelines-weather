@@ -13,8 +13,19 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: NuGetToolInstaller@1
+  displayName: NuGet - Install tool
+
 - script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+  displayName: 'Build $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Publish project
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: 'src\WeatherProject\WeatherProject.csproj'
+    arguments: '-- no-restore --no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:

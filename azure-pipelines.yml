@@ -25,7 +25,7 @@ steps:
     command: publish
     publishWebProjects: false
     projects: 'WeatherProject\WeatherProject.csproj'
-    arguments: '-- no-restore --no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    arguments: '--no-restore --no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
